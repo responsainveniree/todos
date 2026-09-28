@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@todos/shared": ["../../packages/src/index"]
+    },
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "resolvePackageJsonExports": true,

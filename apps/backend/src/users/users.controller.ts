@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import {
   Session,
   type UserSession,
@@ -8,6 +8,7 @@ import {
 import { UsersService } from './users.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateUserDto } from './dto/update-user.dto.js';
+import { auth } from '../lib/auth.js';
 
 @Controller('users')
 export class UsersController {

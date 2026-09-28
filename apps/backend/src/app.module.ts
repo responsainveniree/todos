@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { createObserveModule } from '@nestjs/observe';
 import { AuthModule } from '@thallesp/nestjs-better-auth';
 import { TodosModule } from './todos/todos.module.js';
-import { auth } from '../lib/auth.js';
+import { auth } from './lib/auth.js';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module.js';
+import { AuthModule as AuthModuleApi } from './auth/auth.module.js';
 import * as path from 'path';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
@@ -14,8 +15,8 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: [
-        path.resolve(process.cwd(), '../../.env'), // Coba ambil dari root monorepo
-        path.resolve(process.cwd(), '.env'), // Jika tidak ada, pakai .env lokal di backend
+        path.resolve(process.cwd(), '../../packages/.env'), // Coba ambil dari root monorepo
+        path.resolve(process.cwd(), '../.env'), // Jika tidak ada, pakai .env lokal di backend
       ],
     }),
     // Distributed tracing, auto-correlated logs, request/job metrics, error
@@ -29,6 +30,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     AuthModule.forRoot({ auth }),
     TodosModule,
     UsersModule,
+    AuthModuleApi,
   ],
 })
 export class AppModule {}
